@@ -11,6 +11,12 @@
 
 ---
 
+## 🔗 Repository & Audit Links
+- **GitHub Repository**: `https://github.com/Sakib669/vecosoft-assign2`
+- **AI Prompt History**: Complete refined prompt log available at [`AI_PROMPT_HISTORY.txt`](./AI_PROMPT_HISTORY.txt).
+
+---
+
 ## 📋 Table of Contents
 1. [Core Features](#-core-features)
 2. [Data Structures & Design Rationale](#-data-structures--design-rationale)

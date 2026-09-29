@@ -3,99 +3,110 @@ AI PROMPT HISTORY
 Assessment: Developer Practical Assessment (Vecosoft)
 Candidate: Shafiqul Islam Sakib
 Task: Task 2 — LRU Cache / Problem-Solving
-Repository: vecosoft-assign2
+Repository: https://github.com/Sakib669/vecosoft-assign2
 ================================================================================
 
 [PROMPT 1]
-Tool: AI Coding Assistant (Antigravity)
-Timestamp: 2026-09-29 19:19:15
-Category: Architecture & Problem Analysis
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:18:42
+Category: Specification Extraction & Algorithmic Problem Formulation
 Prompt:
-"Analyze the practical assessment requirement for Task 2: LRU Cache / Problem-Solving.
-Requirements:
-1. Implement a Least Recently Used (LRU) Cache supporting:
-   - Cache(capacity)
-   - get(key)
-   - put(key, value)
-2. Constraints:
-   - Positive capacity constraint validation.
-   - get(key) returns stored value if key exists; otherwise -1.
-   - Successful get() marks key as most recently used (MRU).
-   - put() inserts or updates key/value pair.
-   - When capacity is exceeded, evict least recently used (LRU) entry.
-   - get() and put() must run in O(1) average time.
-3. Bonus Feature:
-   - Optional TTL / expiration support with demonstration and trade-off analysis.
-4. Evaluation Deliverables:
-   - Complete clean source code with type annotations and docstrings.
-   - Comprehensive test suite covering edge cases, boundary conditions, and concurrency.
-   - Step-by-step visual demonstration script.
-   - Pixel-perfect authentic output screenshots for core LRU and TTL bonus.
-   - In-depth README detailing data structures used, why they were chosen, LRU ordering maintenance, time and space complexity, and execution instructions."
+"Act as a Senior Software Engineer and Algorithm Specialist. I have attached the official specification screenshot for Task 2 — LRU Cache / Problem-Solving from the technical assessment portal.
+1. Analyze and extract all explicit functional requirements:
+   - Design and implement a Least Recently Used (LRU) Cache supporting Cache(capacity), get(key), and put(key, value).
+   - Guarantee positive capacity enforcement (throw an error on non-positive capacities).
+   - Ensure get(key) returns the stored value if present and promotes the key to Most Recently Used (MRU); otherwise returns -1.
+   - Ensure put(key, value) inserts or updates entries, evicting the Least Recently Used (LRU) entry in O(1) when capacity is exceeded.
+   - Strict O(1) average time complexity for both get() and put().
+2. Formulate a dual-data-structure architecture combining a Hash Map with a Sentinel-guarded Doubly Linked List to eliminate boundary edge conditions.
+3. Incorporate the optional bonus requirement: Time-To-Live (TTL) expiration support (TTLCache) featuring both passive lazy eviction and active sweep cleanup with detailed trade-off analysis.
+4. Outline requirements for the evaluation deliverables: comprehensive test coverage, execution scripts, and pixel-perfect authentic output screenshots for portal submission."
 
 --------------------------------------------------------------------------------
 
 [PROMPT 2]
-Tool: AI Coding Assistant (Antigravity)
-Timestamp: 2026-09-29 19:22:10
-Category: Data Structure Engineering & Implementation
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:22:15
+Category: Core Implementation & Production Hardening
 Prompt:
-"Implement the LRU Cache in Python using a Hash Map combined with a Doubly Linked List with dummy head/tail sentinels.
-Ensure:
-1. Node class with __slots__ to minimize memory footprint.
-2. LRUCache class aliased to Cache matching exact method signatures:
-   - __init__(capacity)
-   - get(key) -> value or -1
-   - put(key, value)
-3. Provide O(1) internal DLL operations: _add_node, _remove_node, _move_to_head, _pop_tail.
-4. Add reentrant thread-safety locking (threading.RLock).
-5. Implement TTLCache subclass extending LRUCache:
-   - Support optional TTL parameter on put(key, value, ttl=None).
-   - Implement passive lazy expiration on get() and peek() in O(1).
-   - Implement active cleanup_expired() sweep to purge unaccessed expired keys.
-6. Provide state inspection utilities (state_display, items, keys) for visual clarity."
+"Implement the production-grade LRU Cache and TTL Extension in Python with complete type hints and docstrings.
+1. Create a memory-optimized Node class utilizing __slots__ for key, value, prev, next, and optional expires_at.
+2. Implement LRUCache (aliased to Cache matching the problem statement signature) with internal O(1) Doubly Linked List primitives (_add_node, _remove_node, _move_to_head, _pop_tail).
+3. Integrate reentrant locking (threading.RLock) to make all cache operations thread-safe against concurrent reads and writes.
+4. Build TTLCache subclass extending LRUCache to handle time-based expiration alongside capacity eviction, supporting lazy expiration upon access and an explicit cleanup_expired() sweep method.
+5. Include state visualization utilities (state_display(), items(), keys()) for transparent terminal inspection."
 
 --------------------------------------------------------------------------------
 
 [PROMPT 3]
-Tool: AI Coding Assistant (Antigravity)
-Timestamp: 2026-09-29 19:23:00
-Category: Test Suite & Edge Case Coverage
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:23:05
+Category: Test Engineering & Boundary Validation
 Prompt:
-"Construct an exhaustive unit test suite using unittest verifying:
-1. Exact prompt walkthrough sequence: Cache(2), put('A', 10), put('B', 20), get('A') -> 10, put('C', 30) evicts 'B', get('B') -> -1, get('C') -> 30, get('A') -> 10.
-2. Capacity validation: 0, negative values, and non-integer inputs raising ValueError/TypeError.
-3. Boundary edge cases: capacity=1, non-existent key returns -1.
-4. Updating existing key: verifies in-place value update without size increase and recency promotion.
-5. Strict ordering verification: tracks internal DLL sequence across interleaved operations.
-6. TTL expiration tests: verifies lazy eviction returning -1 after expiry, TTL renewal upon update, active cleanup, and remaining TTL queries.
-7. Concurrency / thread safety: multi-threaded stress test with concurrent readers and writers."
+"Develop an exhaustive unit test suite using Python's standard unittest framework covering:
+1. The exact assessment example sequence (Cache(2), interleaved put and get operations, eviction of 'B', and return values).
+2. Strict capacity validation rejecting zero, negative integers, floats, booleans, and non-numeric types.
+3. Boundary conditions including capacity = 1 and non-existent key retrieval returning -1.
+4. In-place updates of existing keys ensuring value overwrite, zero capacity leakage, and promotion to MRU.
+5. Multi-step recency ordering tracking internal DLL sequences through complex interleaved operations.
+6. TTL expiration behavior: validating immediate retrieval, post-TTL lazy expiration returning -1, TTL renewal on update, and active sweep cleanup.
+7. Concurrency stress tests with multiple concurrent threads performing rapid read and write cycles to confirm thread safety."
 
 --------------------------------------------------------------------------------
 
 [PROMPT 4]
-Tool: AI Coding Assistant (Antigravity)
-Timestamp: 2026-09-29 19:25:40
-Category: Verification, Visual Output & Screenshot Pipeline
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:24:15
+Category: Verification, Interactive CLI & Automated Screenshot Generation
 Prompt:
-"Create an authentic screenshot generation pipeline that runs the real implementation and generates high-resolution terminal output screenshots:
-1. output_screenshot.png: Demonstrates real put() operations, get() operations, LRU eviction event, returned values, and internal DLL order.
-2. ttl_bonus_screenshot.png: Demonstrates TTL configuration, immediate active state, post-TTL expiration to -1, and lazy eviction.
-Use headless browser rendering to capture the styled terminal output cleanly with zero scrollbars and high visual polish."
+"Build an automated demonstration runner and screenshot generation pipeline that runs the real implementation and captures high-resolution visual evidence required for the submission:
+1. demo.py: Interactive CLI script presenting the step-by-step assessment example and TTL bonus walkthrough with rich formatted tables, operation details, return values, eviction notifications, and internal cache state.
+2. screenshot_generator.py: Automated pipeline that runs the live code, captures styled output in a dark-mode developer terminal mockup, and renders crisp PNG screenshots using headless Chrome without scrollbars:
+   - output_screenshot.png: Real program output showing put() operations, get() operations, LRU eviction, and returned values.
+   - ttl_bonus_screenshot.png: Real program output demonstrating TTL configuration, immediate retrieval, post-TTL lazy eviction to -1, and cache status."
 
 --------------------------------------------------------------------------------
 
 [PROMPT 5]
-Tool: AI Coding Assistant (Antigravity)
-Timestamp: 2026-09-29 19:30:30
-Category: Comprehensive Documentation & Complexity Analysis
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:30:25
+Category: Technical Documentation & Complexity Analysis
 Prompt:
-"Draft an authoritative, beautifully structured README.md covering:
-1. Executive summary and candidate header.
-2. Visual architecture diagram of Hash Map + Doubly Linked List with Sentinels.
-3. Rationale for data structures (why dict + DLL, why not array or singly linked list, role of sentinels).
-4. Step-by-step mechanics of maintaining LRU ordering.
-5. Formal Time and Space Complexity analysis with mathematical justifications.
-6. Optional TTL bonus deep dive: architecture, lazy vs active eviction strategies, and trade-off comparison.
-7. Embedded real program output screenshots.
-8. Complete setup and reproduction guide for running the demo, tests, and screenshot generator."
+"Author an authoritative, publication-quality README.md explaining:
+1. Executive overview, problem context, and candidate information.
+2. ASCII/visual architecture diagram depicting the Hash Map and Doubly Linked List with sentinel nodes.
+3. Detailed rationale for data structures: why Hash Map + DLL, why an array or singly linked list fails O(1), and the role of dummy sentinels.
+4. Operational mechanics of maintaining LRU ordering during get, insert, update, and eviction.
+5. Formal time and space complexity breakdown with mathematical justifications.
+6. TTL extension deep dive comparing Lazy Eviction vs. Active Sweep vs. Priority Queues, detailing engineering trade-offs.
+7. Embedded high-resolution output screenshots.
+8. Complete setup and reproduction guide for running tests, demo, and screenshot generation."
+
+--------------------------------------------------------------------------------
+
+[PROMPT 6]
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:32:10
+Category: Version Control & Remote GitHub Synchronization
+Prompt:
+"Initialize a clean Git repository tracking all project artifacts, tests, scripts, and documentation under the main branch. Commit all files using atomic, conventional commit messaging ('feat: complete LRU cache implementation...'). Configure the remote origin to https://github.com/Sakib669/vecosoft-assign2.git and push the codebase to establish the live GitHub submission repository."
+
+--------------------------------------------------------------------------------
+
+[PROMPT 7]
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:34:20
+Category: End-to-End Runtime Quality Assurance & Verification
+Prompt:
+"Execute a comprehensive /check verify run on the entire codebase to inspect and confirm runtime health. Run all unit tests, execute the interactive CLI demonstration, re-verify the screenshot generation pipeline, test boundary conditions via the Python interpreter, and verify that the local Git repository is completely clean and synchronized with origin/main. Produce a formal acceptance report documenting observed behaviors, exit codes, and verification evidence."
+
+--------------------------------------------------------------------------------
+
+[PROMPT 8]
+Tool: AI Coding Assistant (Gemini / Claude)
+Timestamp: 2026-09-29 19:37:55
+Category: Prompt Engineering Documentation & Audit Trail Finalization
+Prompt:
+"Consolidate and professionally refine all operational prompts utilized throughout the lifecycle of Task 2 into AI_PROMPT_HISTORY.txt. Ensure all prompts reflect principal-level engineering terminology, structured requirement framing, and comprehensive coverage across architecture, implementation, testing, screenshot generation, documentation, version control, and verification. Stage and push the updated audit trail to the remote repository."
+
+--------------------------------------------------------------------------------
